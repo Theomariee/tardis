@@ -4,23 +4,124 @@
         
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
         <title> {{ headTitle }} | Notes </title>
+
         {% block stylesheets %}
+            
+            <!-- Bootstrap 4 -->
             <link rel="stylesheet" href="assets/css/bootstrap.min.css" crossorigin="anonymous">
+
+            <!-- DataTables -->
+            <link rel="stylesheet" type="text/css" href="assets/DataTables/datatables.min.css"/>
+
+            <!-- Custom CSS -->
+            <link rel="stylesheet" href="assets/css/style-sidebar.css">
+            <link rel="stylesheet" href="assets/css/style.css">
+
         {% endblock %}
         
     </head>
 
     <body>
 
-        {% block body %}{% endblock %}
+        {% block navbar %}
+            <div class="wrapper"> <!-- BEGIN wrapper -->
+                <!-- Sidebar  -->
+                <nav id="sidebar">
+                    <div class="sidebar-header">
+                        <h3>Grades Visualizer</h3>
+                        <strong><img src="assets/logo_esir_white.png" width="100%"/></strong>
+                    </div>
 
+                    <ul class="list-unstyled components">
+                        <li class="active">
+                            <a href="#">
+                                <i class="fas fa-tachometer-alt mr-2"></i>
+                                <div class="br-insert"></div>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-user mr-2"></i>
+                                <div class="br-insert"></div>
+                                Mes notes 
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-search mr-2"></i>
+                                <div class="br-insert"></div>
+                                Recherche
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-bell mr-2"></i>
+                                <div class="br-insert"></div>
+                                Notifications
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <!-- Page Content  -->
+                <div id="content">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <div class="container-fluid">
+
+                            <button type="button" id="sidebarCollapse" class="btn btn-light">
+                                <i class="fas fa-align-left" style="color: #a5a1a1"></i>
+                            </button>
+
+                            <div class="userInfo">
+                                <span class="text-muted">Bienvenue,</span> 
+                                <span class="text-body">16002492</span>
+                                <button type="button" id="userLogout" class="btn btn-light">
+                                    <i class="fas fa-sign-out-alt" style="color: #a5a1a1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </nav>
+
+                    {% block body %} {% endblock %}
+                </div>
+            </div> <!-- END wrapper -->
+        {% endblock %}
+
+        
         {% block javascripts %}
-            <!-- LOAD JAVASCRIPTs -->
+
+            <!-- Javascript -->
             <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+            
+            <!-- Datatables -->
+            <script type="text/javascript" src="assets/DataTables/datatables.min.js"></script>
+
+            <!-- Font Awesome JS -->
+            <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+            <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+
+            <!-- Bootstrap -->
             <script src="assets/js/bootstrap.min.js" crossorigin="anonymous"></script>    
+            
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    
+                    $('.br-insert').toggle();
+
+                    $('#sidebarCollapse').on('click', function () {
+                        $('#sidebar').toggleClass('active');
+                        $('#sidebar').find('svg').toggleClass('mr-2');
+                        $('.br-insert').toggle();
+                    });
+
+                });
+            </script>
+            
         {% endblock %}
 
     </body>

@@ -33,6 +33,16 @@ class Etudiant
      */
     private $notes;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $activerNotifications;
+
+    /**
+     * @ORM\Column(type="string", length=127, nullable=true)
+     */
+    private $adresse_mail;
+
     public function __construct()
     {
         $this->filiere = new ArrayCollection();
@@ -109,6 +119,30 @@ class Etudiant
                 $note->setEtudiant(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getActiverNotifications(): ?bool
+    {
+        return $this->activerNotifications;
+    }
+
+    public function setActiverNotifications(bool $activerNotifications): self
+    {
+        $this->activerNotifications = $activerNotifications;
+
+        return $this;
+    }
+
+    public function getAdresseMail(): ?string
+    {
+        return $this->adresse_mail;
+    }
+
+    public function setAdresseMail(?string $adresse_mail): self
+    {
+        $this->adresse_mail = $adresse_mail;
 
         return $this;
     }

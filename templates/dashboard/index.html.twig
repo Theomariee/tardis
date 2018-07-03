@@ -2,14 +2,119 @@
 
 {% block body %}
 
-    <div class="container">
-        <div class="col-md-12">
-            <button class="btn btn-warning"> Test </button>
+    <div class="container-fluid"> <!-- DEBUT container-fluid -->
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card">
+                    <div class="card-header">
+                        Mes dernières notes
+                        <div class="card-icon">
+                            <i class="fas fa-history"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="grades-history">
+                            <li>
+                                <span class="lead grade-matiere-dashboard">MGT</span>
+                                <span class="text-muted grade-type-dashboard">CC1</span>
+                                <span class="badge badge-pill badge-primary grade-value-dashboard">11</span>
+                            </li>
+                            <li>
+                                <span class="lead grade-matiere-dashboard">SYS2</span>
+                                <span class="text-muted grade-type-dashboard">CCTP1</span>
+                                <span class="badge badge-pill badge-danger grade-value-dashboard">8.5</span>
+                            </li>
+                            <li>
+                                <span class="lead grade-matiere-dashboard">COM</span>
+                                <span class="text-muted grade-type-dashboard">CC3</span>
+                                <span class="badge badge-pill badge-success grade-value-dashboard">15</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Aperçu
+                        <div class="card-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 text-center">
+                                <h5 class="card-title">Meilleure note</h5>
+                                <div class="GaugeMeter" data-text="20" data-percent="100" data-size="180" data-label="COMM">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 text-center">
+                                <h5 class="card-title text-center">Note la plus basse</h5>
+                                <div class="GaugeMeter" data-text="8" data-percent="40" data-size="180" data-label="MGT">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        Agenda
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="events-history">
+                            <li>
+                                <span class="lead event-matiere-dashboard">SYS2</span>
+                                <span class="event-type-dashboard">CC1</span>
+                                <span class="badge badge-pill badge-secondary event-date-dashboard">15/10/2018</span>
+                                <p class="event-comment-dashboard">Réviser le cours du Chapitre 1 à 6 + TD 1 et 2</p>
+                            </li>
+                            <hr/>
+                            <li>
+                                <span class="lead event-matiere-dashboard">COMP</span>
+                                <span class="event-type-dashboard">CC2</span>
+                                <span class="badge badge-pill badge-secondary event-date-dashboard">18/10/2018</span>
+                                <p class="event-comment-dashboard">Un aide mémoire recto autorisé</p>
+                                
+                            </li>
+                            <hr/>
+                            <li>
+                                <span class="lead event-matiere-dashboard">FD</span>
+                                <span class="event-type-dashboard">CCTP1</span>
+                                <span class="badge badge-pill badge-secondary event-date-dashboard">18/10/2018</span>
+                                <p class="event-comment-dashboard">Porte sur les TP1 et 2 (sauf noSQL)</p>
+                            </li>
+                            <hr/>
+                            <li>
+                                <span class="lead event-matiere-dashboard">SYS2</span>
+                                <span class="event-type-dashboard">CCTP2</span>
+                                <span class="badge badge-pill badge-secondary event-date-dashboard">23/10/2018</span>
+                            </li>
+                            <hr/>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </div>
+
+    </div> <!-- FIN container-fluid -->
     
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
+    <script src="assets/Gauge/GaugeMeter.js"></script> 
+
+    <script>
+        $(".GaugeMeter").gaugeMeter();
+    </script>
 {% endblock %}
