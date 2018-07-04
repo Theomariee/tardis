@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head lang="fr">
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <title> {{ headTitle }} | TARDIS </title>
+            
+        <!-- Bootstrap 4 -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css" crossorigin="anonymous">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="assets/css/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
+    </head>
+
+    <body id="loginPage">
+        <div class="container">
+            {% if error %}
+                <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
+
+            <div class="row justify-content-center">
+                <div class="col-md-4 text-center align-self-center">
+                    <img src="assets/tardis.png" width="70%"/>
+                    <h1>Tardis</h1>
+                    <hr class="mb-4">
+                    <form action="{{ path('login') }}" method="post">
+                        <div class="form-group">
+                            <label for="numeroEtudiantInput">Numéro d'étudiant</label>
+                            <input type="text" class="form-control" id="numeroEtudiantInput" maxlength="8" name="_username" value="{{ last_username }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="passwordInput">Numéro d'étudiant</label>
+                            <input type="password" class="form-control" id="passwordInput" maxlength="8" name="_password">
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Se rappeler de moi</label>
+                        </div>
+                            <input type="hidden" name="_target_path" value="/dashboard" />
+                            <button type="submit" class="btn btn-light mt-3">Valider</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,3 +1,24 @@
+/* BEGIN LOGIN */
+
+#loginPage {
+    background-color: #7b3588;
+    color: white;
+}
+
+#loginPage hr {
+    border-color: #ffffff;
+    width: 20%;
+}
+
+#loginPage h1 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 3.7em;
+}
+
+/* END LOGIN */
+
+
+
 /* BEGIN DASHBOARD */
 
 .card-icon

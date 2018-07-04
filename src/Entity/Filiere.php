@@ -26,7 +26,7 @@ class Filiere
     /**
      * @ORM\Column(type="string", length=127)
      */
-    private $nom_complet;
+    private $nomComplet;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Etudiant", mappedBy="filiere")
@@ -63,12 +63,12 @@ class Filiere
 
     public function getNomComplet(): ?string
     {
-        return $this->nom_complet;
+        return $this->nomComplet;
     }
 
-    public function setNomComplet(string $nom_complet): self
+    public function setNomComplet(string $nomComplet): self
     {
-        $this->nom_complet = $nom_complet;
+        $this->nomComplet = $nomComplet;
 
         return $this;
     }

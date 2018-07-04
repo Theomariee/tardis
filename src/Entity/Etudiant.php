@@ -21,7 +21,7 @@ class Etudiant
     /**
      * @ORM\Column(type="string", length=8)
      */
-    private $numero_etudiant;
+    private $numeroEtudiant;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Filiere", inversedBy="etudiants")
@@ -41,7 +41,7 @@ class Etudiant
     /**
      * @ORM\Column(type="string", length=127, nullable=true)
      */
-    private $adresse_mail;
+    private $adresseMail;
 
     public function __construct()
     {
@@ -56,12 +56,12 @@ class Etudiant
 
     public function getNumeroEtudiant(): ?string
     {
-        return $this->numero_etudiant;
+        return $this->numeroEtudiant;
     }
 
-    public function setNumeroEtudiant(string $numero_etudiant): self
+    public function setNumeroEtudiant(string $numeroEtudiant): self
     {
-        $this->numero_etudiant = $numero_etudiant;
+        $this->numeroEtudiant = $numeroEtudiant;
 
         return $this;
     }
@@ -137,12 +137,12 @@ class Etudiant
 
     public function getAdresseMail(): ?string
     {
-        return $this->adresse_mail;
+        return $this->adresseMail;
     }
 
-    public function setAdresseMail(?string $adresse_mail): self
+    public function setAdresseMail(?string $adresseMail): self
     {
-        $this->adresse_mail = $adresse_mail;
+        $this->adresseMail = $adresseMail;
 
         return $this;
     }

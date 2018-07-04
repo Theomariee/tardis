@@ -21,7 +21,7 @@ class Semestre
     /**
      * @ORM\Column(type="integer")
      */
-    private $numero_semestre;
+    private $numeroSemestre;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Matiere", mappedBy="semestre")
@@ -40,12 +40,12 @@ class Semestre
 
     public function getNumeroSemestre(): ?int
     {
-        return $this->numero_semestre;
+        return $this->numeroSemestre;
     }
 
-    public function setNumeroSemestre(int $numero_semestre): self
+    public function setNumeroSemestre(int $numeroSemestre): self
     {
-        $this->numero_semestre = $numero_semestre;
+        $this->numeroSemestre = $numeroSemestre;
 
         return $this;
     }

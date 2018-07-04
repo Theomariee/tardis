@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <title> {{ headTitle }} | Notes </title>
+        <title> {{ headTitle }} | TARDIS </title>
 
         {% block stylesheets %}
             
@@ -31,8 +31,12 @@
                 <!-- Sidebar  -->
                 <nav id="sidebar">
                     <div class="sidebar-header">
-                        <h3>Grades Visualizer</h3>
-                        <strong><img src="assets/logo_esir_white.png" width="100%"/></strong>
+                        <h3>
+                            Tardis
+                            <br>
+                            v0.1
+                        </h3>
+                        <strong><img src="assets/tardis.png" width="100%"/></strong>
                     </div>
 
                     <ul class="list-unstyled components">
@@ -64,6 +68,13 @@
                                 Notifications
                             </a>
                         </li>
+                        <li>
+                            <a href="#">
+                                <i class="fas fa-wrench mr-2"></i>
+                                <div class="br-insert"></div>
+                                Gérer
+                            </a>
+                        </li>
                     </ul>
                 </nav>
 
@@ -79,7 +90,7 @@
                             <div class="userInfo">
                                 <span class="text-muted">Bienvenue,</span> 
                                 <span class="text-body">16002492</span>
-                                <button type="button" id="userLogout" class="btn btn-light">
+                                <button type="button" id="userLogout" class="btn btn-light" onclick="location.href='{{ path('logout') }}'">
                                     <i class="fas fa-sign-out-alt" style="color: #a5a1a1"></i>
                                 </button>
                             </div>
