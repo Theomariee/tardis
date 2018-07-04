@@ -1,3 +1,6 @@
 index:
     path: /
-    controller: App\Controller\LoginController::login
+    controller: App\Controller\DashboardController::dashboard
+
+logout:
+    path: /logout

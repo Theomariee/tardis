@@ -8,14 +8,14 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180703221038 extends AbstractMigration
+final class Version20180704215203 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
-        $this->addSql('CREATE SEQUENCE evenement_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
+        $this->addSql('ALTER SEQUENCE evenement_id_seq INCREMENT BY 1');
         $this->addSql('CREATE TABLE etudiant (id SERIAL NOT NULL, numero_etudiant VARCHAR(8) NOT NULL, activer_notifications BOOLEAN NOT NULL, adresse_mail VARCHAR(127) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE etudiant_filiere (etudiant_id INT NOT NULL, filiere_id INT NOT NULL, PRIMARY KEY(etudiant_id, filiere_id))');
         $this->addSql('CREATE INDEX IDX_FA7F131ADDEAB1A3 ON etudiant_filiere (etudiant_id)');
@@ -63,7 +63,7 @@ final class Version20180703221038 extends AbstractMigration
         $this->addSql('ALTER TABLE matiere DROP CONSTRAINT FK_9014574A5577AFDB');
         $this->addSql('ALTER TABLE evenement DROP CONSTRAINT FK_B26681EA62F39B8');
         $this->addSql('ALTER TABLE note DROP CONSTRAINT FK_CFBDFA14A62F39B8');
-        $this->addSql('DROP SEQUENCE evenement_id_seq CASCADE');
+        $this->addSql('ALTER SEQUENCE evenement_id_seq INCREMENT BY 1');
         $this->addSql('DROP TABLE etudiant');
         $this->addSql('DROP TABLE etudiant_filiere');
         $this->addSql('DROP TABLE evenement');
