@@ -8,8 +8,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @UniqueEntity(fields="numeroEtudiant")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\AppUserRepository")
+ * @UniqueEntity(fields="adresseMail")
  */
 class AppUser implements UserInterface, \Serializable
 {
@@ -78,9 +78,19 @@ class AppUser implements UserInterface, \Serializable
         return $this->password;
     }
 
-    function setPassword($password)
+    public function setPassword($password)
     {
         $this->password = $password;
+    }
+
+    public function getActiverNotifications()
+    {
+        return $this->activerNotifications;
+    }
+
+    public function setActiverNotifications($activerNotifications)
+    {
+        $this->activerNotifications = $activerNotifications;
     }
 
     public function getRoles()

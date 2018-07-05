@@ -17,7 +17,24 @@
 
 /* END LOGIN */
 
+/* BEGIN REGISTER */
 
+#registerPage {
+    background-color: #7b3588;
+    color: white;
+}
+
+#registerPage hr {
+    border-color: #ffffff;
+    width: 20%;
+}
+
+#registerPage h1 {
+    font-family: 'Kanit', sans-serif;
+    font-size: 3.7em;
+}
+
+/* END REGISTER */
 
 /* BEGIN DASHBOARD */
 
