@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 use App\Entity\TypeCc;
 
@@ -15,12 +16,9 @@ class DashboardController extends Controller
     /**
      * @Route("/dashboard", name="dashboard")
      */
-    public function dashboard(Request $request)
+    public function dashboard(Request $request, UserInterface $user)
     {
-        $rTypeCc = $this->getDoctrine()->getRepository(TypeCc::Class);
-        $toTypeCc = $rTypeCc->findAll();
-
-        dump($request->getSession()->get('numeroEtudiant'));
+        dump($user->getEtudiant()->getNumeroEtudiant());
 
         return $this->render('dashboard/dashboard.html.twig', [
             'headTitle' => 'Dashboard',

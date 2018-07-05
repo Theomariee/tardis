@@ -6,12 +6,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-use Symfony\Component\Security\Core\User\UserInterface;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EtudiantRepository")
  */
-class Etudiant implements UserInterface, \Serializable
+class Etudiant
 {
     /**
      * @ORM\Id()
@@ -36,14 +34,9 @@ class Etudiant implements UserInterface, \Serializable
     private $notes;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\OneToOne(targetEntity="App\Entity\AppUser", mappedBy="etudiant", cascade={"persist", "remove"})
      */
-    private $activerNotifications;
-
-    /**
-     * @ORM\Column(type="string", length=127, nullable=true)
-     */
-    private $adresseMail;
+    private $appUser;
 
     public function __construct()
     {
@@ -125,75 +118,20 @@ class Etudiant implements UserInterface, \Serializable
         return $this;
     }
 
-    public function getActiverNotifications(): ?bool
+    public function getAppUser(): ?AppUser
     {
-        return $this->activerNotifications;
+        return $this->appUser;
     }
 
-    public function setActiverNotifications(bool $activerNotifications): self
+    public function setAppUser(AppUser $appUser): self
     {
-        $this->activerNotifications = $activerNotifications;
+        $this->appUser = $appUser;
+
+        // set the owning side of the relation if necessary
+        if ($this !== $appUser->getEtudiant()) {
+            $appUser->setEtudiant($this);
+        }
 
         return $this;
-    }
-
-    public function getAdresseMail(): ?string
-    {
-        return $this->adresseMail;
-    }
-
-    public function setAdresseMail(?string $adresseMail): self
-    {
-        $this->adresseMail = $adresseMail;
-
-        return $this;
-    }
-
-    public function getPassword(): ?string
-    {
-        return 'password';
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    public function getSalt()
-    {
-        return null;
-    }
-
-    public function eraseCredentials()
-    {
-    }
-
-    public function getUsername()
-    {
-        return $this->numeroEtudiant;
-    }
-
-    public function getRoles()
-    {
-        return array('ROLE_USER');
-    }
-
-    public function serialize()
-    {
-        return serialize(array(
-            $this->id,
-            $this->numeroEtudiant,
-            'password',
-        ));
-    }
-
-    public function unserialize($serialized)
-    {
-        list (
-            $this->id,
-            $this->numeroEtudiant,
-        ) = unserialize($serialized, array('allowed_classes' => false));
     }
 }
