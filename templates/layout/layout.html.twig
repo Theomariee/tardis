@@ -11,22 +11,30 @@
         {% block stylesheets %}
             
             <!-- Bootstrap 4 -->
-            <link rel="stylesheet" href="assets/css/bootstrap.min.css" crossorigin="anonymous">
+            <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}" crossorigin="anonymous">
 
             <!-- DataTables -->
-            <link rel="stylesheet" type="text/css" href="assets/DataTables/datatables.min.css"/>
+            <link rel="stylesheet" type="text/css" href="{{ asset('assets/DataTables/datatables.min.css') }}"/>
 
             <!-- Custom CSS -->
-            <link rel="stylesheet" href="assets/css/style-sidebar.css">
-            <link rel="stylesheet" href="assets/css/style.css">
+            <link rel="stylesheet" href="{{ asset('assets/css/style-sidebar.css') }}">
+            <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
         {% endblock %}
         
     </head>
 
+    {% macro active(route) %}
+        {% if app.request.attributes.get('_route') == route %}
+            class="active"
+        {% endif %}
+    {% endmacro active %}
+
     <body>
 
         {% block navbar %}
+            {% import _self as active %}
+
             <div class="wrapper"> <!-- BEGIN wrapper -->
                 <!-- Sidebar  -->
                 <nav id="sidebar">
@@ -36,12 +44,12 @@
                             <br>
                             v0.1
                         </h3>
-                        <strong><img src="assets/tardis.png" width="100%"/></strong>
+                        <strong><img src="{{ asset('assets/tardis.png') }}" width="100%"/></strong>
                     </div>
 
                     <ul class="list-unstyled components">
-                        <li class="active">
-                            <a href="#">
+                        <li {{ active.active('dashboard') }}>
+                            <a href="{{ path('dashboard') }}">
                                 <i class="fas fa-tachometer-alt mr-2"></i>
                                 <div class="br-insert"></div>
                                 Dashboard
@@ -68,13 +76,16 @@
                                 Notifications
                             </a>
                         </li>
-                        <li>
-                            <a href="#">
+                        
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <li {{ active.active('admin_dashboard') }}>
+                            <a href="{{ path('admin_dashboard') }}">
                                 <i class="fas fa-wrench mr-2"></i>
                                 <div class="br-insert"></div>
                                 Gérer
                             </a>
                         </li>
+                        {% endif %}
                     </ul>
                 </nav>
 
@@ -110,14 +121,14 @@
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
             
             <!-- Datatables -->
-            <script type="text/javascript" src="assets/DataTables/datatables.min.js"></script>
+            <script type="text/javascript" src="{{ asset('assets/DataTables/datatables.min.js') }}"></script>
 
             <!-- Font Awesome JS -->
             <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
             <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
             <!-- Bootstrap -->
-            <script src="assets/js/bootstrap.min.js" crossorigin="anonymous"></script>    
+            <script src="{{ asset('assets/js/bootstrap.min.js') }}" crossorigin="anonymous"></script>    
             
             <script type="text/javascript">
                 $(document).ready(function () {

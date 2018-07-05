@@ -24,12 +24,4 @@ class DashboardController extends Controller
             'headTitle' => 'Dashboard',
         ]);
     }
-
-    /**
-     * @Route("/admin", name="admin")
-     */
-    public function admin()
-    {
-        return new Response('<html><body>Admin page!</body></html>');
-    }
 }
