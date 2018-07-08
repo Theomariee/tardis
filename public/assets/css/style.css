@@ -3,6 +3,7 @@
 #loginPage {
     background-color: #7b3588;
     color: white;
+    max-height: 100%;
 }
 
 #loginPage hr {
@@ -13,6 +14,10 @@
 #loginPage h1 {
     font-family: 'Kanit', sans-serif;
     font-size: 3.7em;
+}
+
+#loginPage #content {
+    margin-top: 100%;
 }
 
 /* END LOGIN */

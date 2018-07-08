@@ -18,10 +18,11 @@ class DashboardController extends Controller
      */
     public function dashboard(Request $request, UserInterface $user)
     {
-        dump($user->getEtudiant()->getNumeroEtudiant());
 
         return $this->render('dashboard/dashboard.html.twig', [
             'headTitle' => 'Dashboard',
+            'oUser' => $user,
+            'oEtudiant' => $user->getEtudiant(),
         ]);
     }
 }
