@@ -28,9 +28,15 @@ class Semestre
      */
     private $matieres;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
     public function __construct()
     {
         $this->matieres = new ArrayCollection();
+        $this->date = new \DateTime();
     }
 
     public function getId()
@@ -77,6 +83,18 @@ class Semestre
                 $matiere->setSemestre(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

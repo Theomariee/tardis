@@ -19,32 +19,20 @@ class EvenementRepository extends ServiceEntityRepository
         parent::__construct($registry, Evenement::class);
     }
 
-//    /**
-//     * @return Evenement[] Returns an array of Evenement objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function getEvenementsFiliere($idFiliere) {
+        $conn = $this->getEntityManager()->getConnection();
 
-    /*
-    public function findOneBySomeField($value): ?Evenement
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $sql = '
+            select evenement.id 
+            from evenement
+            inner join matiere_filiere
+            on evenement.matiere_id = matiere_filiere.matiere_id
+            where matiere_filiere.filiere_id = :idFiliere
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['idFiliere' => $idFiliere]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return array_column($stmt->fetchAll(), "id");
     }
-    */
 }

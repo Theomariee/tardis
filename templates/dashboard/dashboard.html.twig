@@ -13,23 +13,31 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <ul class="grades-history">
-                            <li>
-                                <span class="lead grade-matiere-dashboard">MGT</span>
-                                <span class="text-muted grade-type-dashboard">CC1</span>
-                                <span class="badge badge-pill badge-primary grade-value-dashboard">11</span>
-                            </li>
-                            <li>
-                                <span class="lead grade-matiere-dashboard">SYS2</span>
-                                <span class="text-muted grade-type-dashboard">CCTP1</span>
-                                <span class="badge badge-pill badge-danger grade-value-dashboard">8.5</span>
-                            </li>
-                            <li>
-                                <span class="lead grade-matiere-dashboard">COM</span>
-                                <span class="text-muted grade-type-dashboard">CC3</span>
-                                <span class="badge badge-pill badge-success grade-value-dashboard">15</span>
-                            </li>
-                        </ul>
+                        {%  if toDernieresNotesEtudiant is empty %}
+                            <p class="text-muted text-center"> Aucune note à afficher. </p>
+
+                        {% else %}
+                            <ul class="grades-history">
+                                {% for oNote in toDernieresNotesEtudiant|slice(0, 4) %}
+
+                                    {% if oNote.note <= 8 %}
+                                        {% set categorieNote = 'danger' %}
+                                    {% elseif oNote.note <= 10 %}
+                                        {% set categorieNote = 'warning' %}
+                                    {% elseif oNote.note <= 14 %}
+                                        {% set categorieNote = 'primary' %}
+                                    {% elseif (oNote.note <= 20) or (oNote.note > 20) %}
+                                        {% set categorieNote = 'success' %}
+                                    {% endif %}
+
+                                    <li>
+                                        <span class="lead grade-matiere-dashboard">{{ oNote.matiere.code }}</span>
+                                        <span class="text-muted grade-type-dashboard">{{ oNote.typeCc.libelle }}</span>
+                                        <span class="badge badge-pill badge-{{ categorieNote }} grade-value-dashboard">{{ oNote.note }}</span>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -45,15 +53,21 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-md-6 text-center">
-                                <h5 class="card-title">Meilleure note</h5>
-                                <div class="GaugeMeter" data-text="20" data-percent="100" data-size="180" data-label="COMM">
-                                </div>
+                                <h5 class="card-title"> Meilleure note </h5>
+                                    {% if oNoteMax is not null %}
+                                        <div class="GaugeMeter" data-text="{{ oNoteMax.note|round(1, 'floor')  }}" data-percent="{{ (oNoteMax.note / 20 * 100)|round }}" data-size="180" data-label="{{ oNoteMax.matiere.code }}"></div>
+                                    {% else %}
+                                        <div class="GaugeMeter" data-text="-" data-percent="0" data-size="180" data-label="Pas de note"></div>
+                                    {% endif %}
                             </div>
 
                             <div class="col-md-6 text-center">
-                                <h5 class="card-title text-center">Note la plus basse</h5>
-                                <div class="GaugeMeter" data-text="8" data-percent="40" data-size="180" data-label="MGT">
-                                </div>
+                                <h5 class="card-title text-center"> Note la plus basse </h5>
+                                    {% if oNoteMin is not null %}
+                                        <div class="GaugeMeter" data-text="{{ oNoteMin.note|round(1, 'floor')  }}" data-percent="{{ (oNoteMin.note / 20 * 100)|round }}" data-size="180" data-label="{{ oNoteMin.matiere.code }}"></div>
+                                    {% else %}
+                                        <div class="GaugeMeter" data-text="-" data-percent="0" data-size="180" data-label="Pas de note"></div>
+                                    {% endif %}
                             </div>
                         </div>
                     </div>
@@ -69,36 +83,22 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <ul class="events-history">
-                            <li>
-                                <span class="lead event-matiere-dashboard">SYS2</span>
-                                <span class="event-type-dashboard">CC1</span>
-                                <span class="badge badge-pill badge-secondary event-date-dashboard">15/10/2018</span>
-                                <p class="event-comment-dashboard">Réviser le cours du Chapitre 1 à 6 + TD 1 et 2</p>
-                            </li>
-                            <hr/>
-                            <li>
-                                <span class="lead event-matiere-dashboard">COMP</span>
-                                <span class="event-type-dashboard">CC2</span>
-                                <span class="badge badge-pill badge-secondary event-date-dashboard">18/10/2018</span>
-                                <p class="event-comment-dashboard">Un aide mémoire recto autorisé</p>
-                                
-                            </li>
-                            <hr/>
-                            <li>
-                                <span class="lead event-matiere-dashboard">FD</span>
-                                <span class="event-type-dashboard">CCTP1</span>
-                                <span class="badge badge-pill badge-secondary event-date-dashboard">18/10/2018</span>
-                                <p class="event-comment-dashboard">Porte sur les TP1 et 2 (sauf noSQL)</p>
-                            </li>
-                            <hr/>
-                            <li>
-                                <span class="lead event-matiere-dashboard">SYS2</span>
-                                <span class="event-type-dashboard">CCTP2</span>
-                                <span class="badge badge-pill badge-secondary event-date-dashboard">23/10/2018</span>
-                            </li>
-                            <hr/>
-                        </ul>
+                        {%  if toProchainsEvenements is empty %}
+                            <p class="text-muted text-center"> Aucun évènement à venir. </p>
+
+                        {% else %}
+                            <ul class="events-history">
+                                {% for oEvenement in toProchainsEvenements %}
+                                    <li>
+                                        <span class="lead event-matiere-dashboard">{{ oEvenement.matiere.code }}</span>
+                                        <span class="event-type-dashboard">{{ oEvenement.typeCc.libelle }}</span>
+                                        <span class="badge badge-pill badge-secondary event-date-dashboard">{{ oEvenement.date|date("d/m/Y") }}</span>
+                                        <p class="event-comment-dashboard">{{ oEvenement.commentaire }}</p>
+                                    </li>
+                                    <hr/>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
                     </div>
                 </div>
             </div>

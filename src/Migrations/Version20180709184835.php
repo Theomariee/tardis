@@ -8,7 +8,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20180705173327 extends AbstractMigration
+final class Version20180709184835 extends AbstractMigration
 {
     public function up(Schema $schema) : void
     {
@@ -16,16 +16,15 @@ final class Version20180705173327 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'postgresql', 'Migration can only be executed safely on \'postgresql\'.');
 
         $this->addSql('CREATE SEQUENCE app_user_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
-        $this->addSql('CREATE SEQUENCE evenement_id_seq INCREMENT BY 1 MINVALUE 1 START 1');
         $this->addSql('CREATE TABLE app_user (id INT NOT NULL, etudiant_id INT NOT NULL, adresse_mail VARCHAR(255) NOT NULL, password VARCHAR(64) NOT NULL, activer_notifications BOOLEAN NOT NULL, roles TEXT NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_88BDF3E9A1207B9E ON app_user (adresse_mail)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_88BDF3E9DDEAB1A3 ON app_user (etudiant_id)');
         $this->addSql('COMMENT ON COLUMN app_user.roles IS \'(DC2Type:array)\'');
         $this->addSql('CREATE TABLE etudiant (id SERIAL NOT NULL, numero_etudiant VARCHAR(8) NOT NULL, PRIMARY KEY(id))');
-        $this->addSql('CREATE TABLE etudiant_filiere (etudiant_id INT NOT NULL, filiere_id INT NOT NULL, PRIMARY KEY(etudiant_id, filiere_id))');
+        $this->addSql('CREATE TABLE etudiant_filiere (id SERIAL NOT NULL, etudiant_id INT NOT NULL, filiere_id INT NOT NULL, date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_FA7F131ADDEAB1A3 ON etudiant_filiere (etudiant_id)');
         $this->addSql('CREATE INDEX IDX_FA7F131A180AA129 ON etudiant_filiere (filiere_id)');
-        $this->addSql('CREATE TABLE evenement (id INT NOT NULL, matiere_id INT NOT NULL, type_cc_id INT NOT NULL, date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, commentaire VARCHAR(512) DEFAULT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE evenement (id SERIAL NOT NULL, matiere_id INT NOT NULL, type_cc_id INT NOT NULL, date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, commentaire VARCHAR(512) DEFAULT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE INDEX IDX_B26681EF46CD258 ON evenement (matiere_id)');
         $this->addSql('CREATE INDEX IDX_B26681EA62F39B8 ON evenement (type_cc_id)');
         $this->addSql('CREATE TABLE filiere (id SERIAL NOT NULL, code VARCHAR(15) NOT NULL, nom_complet VARCHAR(127) NOT NULL, PRIMARY KEY(id))');
@@ -38,11 +37,11 @@ final class Version20180705173327 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_CFBDFA14F46CD258 ON note (matiere_id)');
         $this->addSql('CREATE INDEX IDX_CFBDFA14DDEAB1A3 ON note (etudiant_id)');
         $this->addSql('CREATE INDEX IDX_CFBDFA14A62F39B8 ON note (type_cc_id)');
-        $this->addSql('CREATE TABLE semestre (id SERIAL NOT NULL, numero_semestre INT NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE TABLE semestre (id SERIAL NOT NULL, numero_semestre INT NOT NULL, date TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
         $this->addSql('CREATE TABLE type_cc (id SERIAL NOT NULL, libelle VARCHAR(15) NOT NULL, PRIMARY KEY(id))');
         $this->addSql('ALTER TABLE app_user ADD CONSTRAINT FK_88BDF3E9DDEAB1A3 FOREIGN KEY (etudiant_id) REFERENCES etudiant (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE etudiant_filiere ADD CONSTRAINT FK_FA7F131ADDEAB1A3 FOREIGN KEY (etudiant_id) REFERENCES etudiant (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
-        $this->addSql('ALTER TABLE etudiant_filiere ADD CONSTRAINT FK_FA7F131A180AA129 FOREIGN KEY (filiere_id) REFERENCES filiere (id) ON DELETE CASCADE NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE etudiant_filiere ADD CONSTRAINT FK_FA7F131ADDEAB1A3 FOREIGN KEY (etudiant_id) REFERENCES etudiant (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE etudiant_filiere ADD CONSTRAINT FK_FA7F131A180AA129 FOREIGN KEY (filiere_id) REFERENCES filiere (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE evenement ADD CONSTRAINT FK_B26681EF46CD258 FOREIGN KEY (matiere_id) REFERENCES matiere (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE evenement ADD CONSTRAINT FK_B26681EA62F39B8 FOREIGN KEY (type_cc_id) REFERENCES type_cc (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
         $this->addSql('ALTER TABLE matiere ADD CONSTRAINT FK_9014574A5577AFDB FOREIGN KEY (semestre_id) REFERENCES semestre (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
@@ -71,7 +70,6 @@ final class Version20180705173327 extends AbstractMigration
         $this->addSql('ALTER TABLE evenement DROP CONSTRAINT FK_B26681EA62F39B8');
         $this->addSql('ALTER TABLE note DROP CONSTRAINT FK_CFBDFA14A62F39B8');
         $this->addSql('DROP SEQUENCE app_user_id_seq CASCADE');
-        $this->addSql('DROP SEQUENCE evenement_id_seq CASCADE');
         $this->addSql('DROP TABLE app_user');
         $this->addSql('DROP TABLE etudiant');
         $this->addSql('DROP TABLE etudiant_filiere');

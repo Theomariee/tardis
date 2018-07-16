@@ -29,7 +29,7 @@ class Filiere
     private $nomComplet;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Etudiant", mappedBy="filiere")
+     * @ORM\OneToMany(targetEntity="App\Entity\EtudiantFiliere", mappedBy="filiere")
      */
     private $etudiants;
 
@@ -74,28 +74,31 @@ class Filiere
     }
 
     /**
-     * @return Collection|Etudiant[]
+     * @return Collection|EtudiantFiliere[]
      */
     public function getEtudiants(): Collection
     {
         return $this->etudiants;
     }
 
-    public function addEtudiant(Etudiant $etudiant): self
+    public function addEtudiant(EtudiantFiliere $etudiant): self
     {
         if (!$this->etudiants->contains($etudiant)) {
             $this->etudiants[] = $etudiant;
-            $etudiant->addFiliere($this);
+            $etudiant->setFiliere($this);
         }
 
         return $this;
     }
 
-    public function removeEtudiant(Etudiant $etudiant): self
+    public function removeEtudiant(EtudiantFiliere $etudiant): self
     {
         if ($this->etudiants->contains($etudiant)) {
             $this->etudiants->removeElement($etudiant);
-            $etudiant->removeFiliere($this);
+            // set the owning side to null (unless already changed)
+            if ($etudiant->getFiliere() === $this) {
+                $etudiant->setFiliere(null);
+            }
         }
 
         return $this;
@@ -108,24 +111,20 @@ class Filiere
     {
         return $this->matieres;
     }
-
     public function addMatiere(Matiere $matiere): self
     {
         if (!$this->matieres->contains($matiere)) {
             $this->matieres[] = $matiere;
             $matiere->addFiliere($this);
         }
-
         return $this;
     }
-
     public function removeMatiere(Matiere $matiere): self
     {
         if ($this->matieres->contains($matiere)) {
             $this->matieres->removeElement($matiere);
             $matiere->removeFiliere($this);
         }
-
         return $this;
     }
 }

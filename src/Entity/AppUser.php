@@ -172,5 +172,4 @@ class AppUser implements UserInterface, \Serializable
 
         return $this;
     }
-
 }

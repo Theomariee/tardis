@@ -6,12 +6,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\EtudiantRepository")
- * @UniqueEntity(fields="numeroEtudiant")
  */
 class Etudiant
 {
@@ -28,9 +24,9 @@ class Etudiant
     private $numeroEtudiant;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Filiere", inversedBy="etudiants")
+     * @ORM\OneToMany(targetEntity="App\Entity\EtudiantFiliere", mappedBy="etudiant")
      */
-    private $filiere;
+    private $filieres;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Note", mappedBy="etudiant")
@@ -44,7 +40,7 @@ class Etudiant
 
     public function __construct()
     {
-        $this->filiere = new ArrayCollection();
+        $this->filieres = new ArrayCollection();
         $this->notes = new ArrayCollection();
     }
 
@@ -66,26 +62,31 @@ class Etudiant
     }
 
     /**
-     * @return Collection|Filiere[]
+     * @return Collection|EtudiantFiliere[]
      */
-    public function getFiliere(): Collection
+    public function getFilieres(): Collection
     {
-        return $this->filiere;
+        return $this->filieres;
     }
 
-    public function addFiliere(Filiere $filiere): self
+    public function addFiliere(EtudiantFiliere $filiere): self
     {
-        if (!$this->filiere->contains($filiere)) {
-            $this->filiere[] = $filiere;
+        if (!$this->filieres->contains($filiere)) {
+            $this->filieres[] = $filiere;
+            $filiere->setEtudiant($this);
         }
 
         return $this;
     }
 
-    public function removeFiliere(Filiere $filiere): self
+    public function removeFiliere(EtudiantFiliere $filiere): self
     {
-        if ($this->filiere->contains($filiere)) {
-            $this->filiere->removeElement($filiere);
+        if ($this->filieres->contains($filiere)) {
+            $this->filieres->removeElement($filiere);
+            // set the owning side to null (unless already changed)
+            if ($filiere->getEtudiant() === $this) {
+                $filiere->setEtudiant(null);
+            }
         }
 
         return $this;
@@ -98,17 +99,14 @@ class Etudiant
     {
         return $this->notes;
     }
-
     public function addNote(Note $note): self
     {
         if (!$this->notes->contains($note)) {
             $this->notes[] = $note;
             $note->setEtudiant($this);
         }
-
         return $this;
     }
-
     public function removeNote(Note $note): self
     {
         if ($this->notes->contains($note)) {
@@ -118,7 +116,6 @@ class Etudiant
                 $note->setEtudiant(null);
             }
         }
-
         return $this;
     }
 

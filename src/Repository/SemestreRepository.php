@@ -19,32 +19,19 @@ class SemestreRepository extends ServiceEntityRepository
         parent::__construct($registry, Semestre::class);
     }
 
-//    /**
-//     * @return Semestre[] Returns an array of Semestre objects
-//     */
-    /*
-    public function findByExampleField($value)
+    /**
+     * @return Semestre
+     */
+    public function getSemestreActuel()
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+        $qb = $this->createQueryBuilder('s')
+            ->andWhere('s.date <= :dateactuelle')
+            ->setParameter('dateactuelle', new \DateTime())
+            ->orderBy('s.date', 'DESC')
+            ->setMaxResults(1)
             ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+            ->getOneOrNullResult();
 
-    /*
-    public function findOneBySomeField($value): ?Semestre
-    {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $qb;
     }
-    */
 }
