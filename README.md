@@ -27,6 +27,6 @@ L'application, en cours de développement, repose sur le framework [PHP/Symfony 
 - [x] Templating page de connexion et inscription
 - [x] Templating du dashboard (statistiques et notifications)
 - [x] Implémentation de la connexion et de l'inscription
-- [ ] Implémentation du dashboard  **(en cours)**
-- [ ] Templating du dashboard Admin (gestion des droits, ajout d'évènements, import de notes ...)
+- [x] Implémentation du dashboard
+- [ ] Templating du dashboard Admin (gestion des droits, ajout d'évènements, import de notes ...) **(en cours)**
 - [ ] Implémentation du dashboard Admin
