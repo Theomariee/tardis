@@ -1,4 +1,124 @@
 {% extends 'layout/layout.html.twig' %}
 
 {% block body %}
+
+    <div class="container-fluid"> <!-- DEBUT container-fluid -->
+        <div class="row">
+
+            <div class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Agenda
+                        <div class="card-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 text-center admin-add">
+                                <i class="fas fa-plus fa-2x"></i>
+                                <br>
+                                Ajouter
+                            </div>
+
+                            <div class="col-md-6 text-center admin-modify">
+                                <i class="fas fa-pencil-alt fa-2x"></i>
+                                <br>
+                                Modifier
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Filière
+                        <div class="card-icon">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 text-center admin-add">
+                                <i class="fas fa-plus fa-2x"></i>
+                                <br>
+                                Ajouter
+                            </div>
+
+                            <div class="col-md-6 text-center admin-modify">
+                                <i class="fas fa-pencil-alt fa-2x"></i>
+                                <br>
+                                Modifier
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Matière
+                        <div class="card-icon">
+                            <i class="fas fa-book"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 text-center admin-add">
+                                <i class="fas fa-plus fa-2x"></i>
+                                <br>
+                                Ajouter
+                            </div>
+
+                            <div class="col-md-6 text-center admin-modify">
+                                <i class="fas fa-pencil-alt fa-2x"></i>
+                                <br>
+                                Modifier
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Note
+                        <div class="card-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6 text-center admin-add">
+                                <i class="fas fa-plus fa-2x"></i>
+                                <br>
+                                Ajouter
+                            </div>
+
+                            <div class="col-md-6 text-center admin-modify">
+                                <i class="fas fa-pencil-alt fa-2x"></i>
+                                <br>
+                                Modifier
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div> <!-- FIN container-fluid -->
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="assets/Gauge/GaugeMeter.js"></script>
+
+    <script>
+        $(".GaugeMeter").gaugeMeter();
+    </script>
 {% endblock %}

@@ -99,36 +99,61 @@
     display: inline-block;
   }
   
-  .GaugeMeter SPAN, .GaugeMeter B {
-    width: 54%;
-    position: Absolute;
-    text-align: Center;
-    display: Inline-Block;
-    color: RGBa(0,0,0,.8);
-    font-weight: 100;
-    font-family: "Open Sans", Arial;
-    overflow: Hidden;
-    white-space: NoWrap;
-    text-overflow: Ellipsis;
-    margin: 0 23%;
-  }
-  
-  .GaugeMeter[data-style="Semi"] B {
-    width: 80%;
-    margin: 0 10%;
-  }
-  
-  .GaugeMeter S, .GaugeMeter U {
-    text-decoration: None;
-    font-size: .60em;
-    font-weight: 200;
-    opacity: .6;
-  }
-  
-  .GaugeMeter B {
-    color: #000;
-    font-weight: 200;
-    opacity: .8;
-  }
+.GaugeMeter SPAN, .GaugeMeter B {
+width: 54%;
+position: Absolute;
+text-align: Center;
+display: Inline-Block;
+color: RGBa(0,0,0,.8);
+font-weight: 100;
+font-family: "Open Sans", Arial;
+overflow: Hidden;
+white-space: NoWrap;
+text-overflow: Ellipsis;
+margin: 0 23%;
+}
+
+.GaugeMeter[data-style="Semi"] B {
+width: 80%;
+margin: 0 10%;
+}
+
+.GaugeMeter S, .GaugeMeter U {
+text-decoration: None;
+font-size: .60em;
+font-weight: 200;
+opacity: .6;
+}
+
+.GaugeMeter B {
+color: #000;
+font-weight: 200;
+opacity: .8;
+}
 
 /* END DASHBOARD */
+
+/* BEGIN ADMIN DASHBOARD */
+.admin-add {
+    transition: all .05s ease-in-out;
+    color: #121212;
+}
+
+.admin-add:hover {
+    color: #B0B0B0;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.admin-modify {
+    transition: all .05s ease-in-out;
+    color: #121212;
+}
+
+.admin-modify:hover {
+    color: #B0B0B0;
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+/* END ADMIN DASHBOARD */

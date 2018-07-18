@@ -5,18 +5,7 @@ namespace App\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Security\Core\User\UserInterface;
-
-use App\Entity\TypeCc;
-use App\Entity\Note;
-use App\Entity\Matiere;
-use App\Entity\Etudiant;
-use App\Entity\EtudiantFiliere;
-use App\Entity\Filiere;
-use App\Entity\Semestre;
-use App\Entity\Evenement;
 
 class DashboardController extends Controller
 {
