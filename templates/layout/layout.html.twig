@@ -20,6 +20,13 @@
             <link rel="stylesheet" href="{{ asset('assets/css/style-sidebar.css') }}">
             <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
+            <!-- Javascript -->
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+            <!-- Chart.js -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js" integrity="sha256-XF29CBwU1MWLaGEnsELogU6Y6rcc5nCkhhx89nFMIDQ=" crossorigin="anonymous"></script>
+
         {% endblock %}
         
     </head>
@@ -56,7 +63,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#">
+                            <a href="{{ path('note_listeNotes') }}">
                                 <i class="fas fa-user mr-2"></i>
                                 <div class="br-insert"></div>
                                 Mes notes 
@@ -67,13 +74,6 @@
                                 <i class="fas fa-search mr-2"></i>
                                 <div class="br-insert"></div>
                                 Recherche
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fas fa-bell mr-2"></i>
-                                <div class="br-insert"></div>
-                                Notifications
                             </a>
                         </li>
                         
@@ -98,6 +98,12 @@
                                 <i class="fas fa-align-left" style="color: #a5a1a1"></i>
                             </button>
 
+                            {# <span class="notificationsToggle">
+                                Activer notifications
+                                <input type="checkbox" id="toggly">
+                                <label for="toggly"><i></i></label>
+                            </span> #}
+
                             <div class="userInfo">
                                 <span class="text-muted">Bienvenue,</span> 
                                 <span class="text-body">{{ oEtudiant.numeroEtudiant }}</span>
@@ -115,11 +121,6 @@
 
         
         {% block javascripts %}
-
-            <!-- Javascript -->
-            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-            
             <!-- Datatables -->
             <script type="text/javascript" src="{{ asset('assets/DataTables/datatables.min.js') }}"></script>
 
@@ -128,11 +129,10 @@
             <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 
             <!-- Bootstrap -->
-            <script src="{{ asset('assets/js/bootstrap.min.js') }}" crossorigin="anonymous"></script>    
+            <script src="{{ asset('assets/js/bootstrap.min.js') }}" crossorigin="anonymous"></script>
             
             <script type="text/javascript">
                 $(document).ready(function () {
-                    
                     $('.br-insert').toggle();
 
                     $('#sidebarCollapse').on('click', function () {
@@ -141,6 +141,8 @@
                         $('.br-insert').toggle();
                     });
 
+                    //Tri datatables dd/mm/Y
+                    jQuery.extend(jQuery.fn.dataTableExt.oSort,{"date-eu-pre":function(e){if(!(e=e.replace(" ","")))return 0;var t,r=e.split(/[\.\-\/]/);t=r[2]?r[2]:0;var n=r[1];1==n.length&&(n=0+n);var u=r[0];return 1==u.length&&(u=0+u),1*(t+n+u)},"date-eu-asc":function(e,t){return e<t?-1:t<e?1:0},"date-eu-desc":function(e,t){return e<t?1:t<e?-1:0}});
                 });
             </script>
             

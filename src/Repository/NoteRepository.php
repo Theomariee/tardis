@@ -19,32 +19,35 @@ class NoteRepository extends ServiceEntityRepository
         parent::__construct($registry, Note::class);
     }
 
-//    /**
-//     * @return Note[] Returns an array of Note objects
-//     */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('n.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    public function getMeilleureNote($idMatiere, $idTypeCc) {
+        $conn = $this->getEntityManager()->getConnection();
 
-    /*
-    public function findOneBySomeField($value): ?Note
-    {
-        return $this->createQueryBuilder('n')
-            ->andWhere('n.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $sql = '
+            select max(note) as meilleurenote
+            from note
+            where matiere_id = :idMatiere
+            and type_cc_id = :idTypeCc
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['idMatiere' => $idMatiere, 'idTypeCc' => $idTypeCc]);
+
+        $tResult = $stmt->fetch();
+        return $tResult['meilleurenote'];
     }
-    */
+
+    public function getNoteMoyenne($idMatiere, $idTypeCc) {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select avg(note) as moyenne
+            from note
+            where matiere_id = :idMatiere
+            and type_cc_id = :idTypeCc
+        ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute(['idMatiere' => $idMatiere, 'idTypeCc' => $idTypeCc]);
+
+        $tResult = $stmt->fetch();
+        return $tResult['moyenne'];
+    }
 }

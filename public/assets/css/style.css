@@ -1,3 +1,20 @@
+/* BEGIN DATATABLES */
+
+.dataTables_filter {
+    white-space:nowrap;
+    margin-right: 1.8%;
+}
+
+.dataTables_filter input {
+    height: 30px;
+}
+
+.dataTables_filter label, .dataTables_filter input {
+    display: inline-block;
+}
+
+/* END DATATABLES */
+
 /* BEGIN LOGIN */
 
 #loginPage {
@@ -40,6 +57,69 @@
 }
 
 /* END REGISTER */
+
+/* BEGIN HEADER */
+/* Checkbox body */
+
+.notificationsToggle label {
+    display: block;
+    width: 54px;
+    height: 32px;
+    margin: 0px auto;
+    border-radius: 100px;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    background-color: #E6E9EC;
+}
+
+.notificationsToggle input {
+    display: none;
+}
+
+
+/* The toggle */
+
+.notificationsToggle i {
+    height: 28px;
+    width: 28px;
+    background: #ffffff;
+    display: inline-block;
+    border-radius: 100px;
+    margin-top: 2px;
+    margin-left: 2px;
+    transition: all 0.2s ease-in-out;
+    -webkit-transition: all 0.2s ease-in-out;
+    pointer-events: none;
+    box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+}
+
+.notificationsToggle label:hover>.notificationsToggle i {
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.20);
+    transform: scale(1.01);
+}
+
+.notificationsToggle input:checked+label> i {
+    margin-left: 24px;
+}
+
+.notificationsToggle label:active {
+    background-color: #A6B9CB;
+}
+
+.notificationsToggle label:active>i {
+    width: 34px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.20);
+}
+
+.notificationsToggle input:checked+label:active>.notificationsToggle i {
+    margin-left: 18px;
+}
+
+.notificationsToggle input:checked+label {
+    background-color: #008FFF;
+}
+
+/* END HEADER */
 
 /* BEGIN DASHBOARD */
 

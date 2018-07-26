@@ -15,7 +15,7 @@ class DashboardController extends Controller
     public function dashboard(Request $request, UserInterface $user)
     {
         $this->init($user);
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $rEtudiant = $em->getRepository('App:Etudiant');
         $rNote = $em->getRepository('App:Note');
         $rMatiere = $em->getRepository('App:Matiere');
